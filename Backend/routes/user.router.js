@@ -1,6 +1,7 @@
 import express from 'express'
 import { register } from '../controller/user.controller.js'
-import upload from '../middleware/upload.js';
+import upload from '../config/cloudinary.js';
+// import upload from '../middleware/upload.js';
 
 const userRouter=express.Router()
 

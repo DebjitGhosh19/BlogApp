@@ -27,14 +27,8 @@ const userSchema=new mongoose.Schema({
     required:true
   },
   image: {
-      url: {
-        type: String,
-        required: true,
-      },
-      public_id: {
-        type: String,
-        required: true,
-      },
+     type:String,
+     required:true
     },
   
   role:{
