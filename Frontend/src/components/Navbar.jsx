@@ -44,7 +44,7 @@ function Navbar() {
           <li>
             <Link to="/" className="hover:text-blue-500 duration-200">
               HOME
-            </Link>A
+            </Link>
           </li>
 
           <li>
