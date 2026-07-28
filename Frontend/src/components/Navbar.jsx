@@ -15,7 +15,7 @@ function Navbar() {
   const handleLogout = async () => {
     try {
       const { data } = await axios.get(
-        `${process.env.backendUrl}/api/users/logout`,
+        `http://localhost:4001/api/users/logout`,
         { withCredentials: true }
       );
 
