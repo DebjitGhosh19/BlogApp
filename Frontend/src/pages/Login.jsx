@@ -17,7 +17,7 @@ function Login() {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:4001/api/users/login",
+        `${process.env.backendUrl}/api/users/login`,
         { email, password, role },
         {
           withCredentials: true,
@@ -39,13 +39,13 @@ function Login() {
       setRole("");
       navigateTo("/");
     } catch (error) {
-      // console.log(error);
-      toast.error(
-        error.response.data.message || "Please fill the required fields",
-        {
-          duration: 3000,
-        }
-      );
+      const message =
+        error?.response?.data?.message ||
+        error?.message ||
+        "Please fill the required fields";
+      toast.error(message, {
+        duration: 3000,
+      });
     }
   };
 

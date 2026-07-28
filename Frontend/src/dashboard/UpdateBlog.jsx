@@ -29,7 +29,7 @@ function UpdateBlog() {
     const fetchBlog = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:4001/api/blogs/single-blog/${id}`,
+          `${process.env.backendUrl}/api/blogs/single-blog/${id}`,
 
           {
             withCredentials: true,
@@ -61,7 +61,7 @@ function UpdateBlog() {
     formData.append("blogImage", blogImage);
     try {
       const { data } = await axios.put(
-        `http://localhost:4001/api/blogs/update/${id}`,
+        `${process.env.backendUrl}/api/blogs/update/${id}`,
         formData,
         {
           withCredentials: true,
@@ -74,10 +74,11 @@ function UpdateBlog() {
       toast.success(data.message || "Blog updated successfully");
       navigateTo("/");
     } catch (error) {
-      // console.log(error);
-      toast.error(
-        error.response.data.message || "Please fill the required fields"
-      );
+      const message =
+        error?.response?.data?.message ||
+        error?.message ||
+        "Please fill the required fields";
+      toast.error(message);
     }
   };
 

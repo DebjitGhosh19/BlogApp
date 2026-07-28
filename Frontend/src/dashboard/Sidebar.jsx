@@ -24,7 +24,7 @@ function Sidebar({ setComponent }) {
     e.preventDefault();
     try {
       const { data } = await axios.get(
-        "http://localhost:4001/api/users/logout",
+        `${process.env.backendUrl}/api/users/logout`,
         { withCredentials: true }
       );
       toast.success(data.message);
@@ -32,8 +32,11 @@ function Sidebar({ setComponent }) {
       setIsAuthenticated(false);
       navigateTo("/login");
     } catch (error) {
-      // console.log(error);
-      toast.error(error.data.message || "Failed to logout");
+      const message =
+        error?.response?.data?.message ||
+        error?.message ||
+        "Failed to logout";
+      toast.error(message);
     }
   };
 

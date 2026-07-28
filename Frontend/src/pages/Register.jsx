@@ -41,7 +41,7 @@ function Register() {
     formData.append("photo", photo);
     try {
       const { data } = await axios.post(
-        "http://localhost:4001/api/users/register",
+        `${process.env.backendUrl}/api/users/register`,
         formData,
         {
           withCredentials: true,
@@ -65,10 +65,11 @@ function Register() {
       setPhotoPreview("");
       navigateTo("/");
     } catch (error) {
-      // console.log(error);
-      toast.error(
-        error.response.data.message || "Please fill the required fields"
-      );
+      const message =
+        error?.response?.data?.message ||
+        error?.message ||
+        "Please fill the required fields";
+      toast.error(message);
     }
   };
 
