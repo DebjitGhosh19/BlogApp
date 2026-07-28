@@ -1,0 +1,40 @@
+import React, { useState } from "react";
+import { useAuth } from "../context/AuthProvider";
+import Sidebar from "../dashboard/Sidebar";
+import MyProfile from "../dashboard/MyProfile";
+import MyBlogs from "../dashboard/MyBlogs";
+import CreateBlog from "../dashboard/CreateBlog";
+import UpdateBlog from "../dashboard/UpdateBlog";
+import { Navigate } from "react-router-dom";
+function Dashboard() {
+  const { profile, isAuthenticated } = useAuth();
+  const [component, setComponent] = useState("My Blogs");
+  // console.log(profile);
+  // console.log(isAuthenticated);
+
+  if (!isAuthenticated) {
+    return <Navigate to={"/"} />;
+  }
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <div className="flex flex-col md:flex-row gap-4 md:gap-0">
+        <div className="w-full md:w-1/4">
+          <Sidebar component={component} setComponent={setComponent} />
+        </div>
+        <div className="w-full md:w-3/4 px-4 md:px-8 py-4">
+          {component === "My Profile" ? (
+            <MyProfile />
+          ) : component === "Create Blog" ? (
+            <CreateBlog />
+          ) : component === "Update Blog" ? (
+            <UpdateBlog />
+          ) : (
+            <MyBlogs />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Dashboard;
