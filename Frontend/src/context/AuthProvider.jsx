@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { createContext, useContext, useEffect, useState } from "react";
+import API_URL from "../api";
 
 export const AuthContext = createContext();
 
@@ -23,7 +24,7 @@ export const AuthProvider = ({ children }) => {
         }
 
         // attach token to Authorization header
-        const { data } = await axios.get("http://localhost:4001/api/users/my-profile", {
+        const { data } = await axios.get(`${API_URL}/api/users/my-profile`, {
           withCredentials: true,
           headers: {
             Authorization: `Bearer ${token}`,
@@ -42,7 +43,7 @@ export const AuthProvider = ({ children }) => {
     const fetchBlogs = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:4001/api/blogs/all-blogs`,
+          `${API_URL}/api/blogs/all-blogs`,
           { withCredentials: true }
         );
         // depending on backend response shape, prefer data.blogs fallback to entire data
